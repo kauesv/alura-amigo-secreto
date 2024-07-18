@@ -1,15 +1,18 @@
 let listaAmigos = [];
-let listaAmigosSortidos = [];
+let sorteioFeito = false;
 
 function adicionar(){
-    let nomeAmigo = document.getElementById("nome-amigo").value;
+    let nomeAmigo = document.getElementById("nome-amigo");
     let amigosIncluidos = document.getElementById("lista-amigos");
 
     //Adiciono o nome na lista
-    listaAmigos.push(nomeAmigo);
+    listaAmigos.push(nomeAmigo.value);
 
     //Adiciona a lista no HTML
     amigosIncluidos.innerHTML = listaAmigos;
+
+    //Limpa o campo para um novo nome
+    nomeAmigo.value = "";
 }
 
 function sortear(){
@@ -20,6 +23,11 @@ function sortear(){
     }
 
     let amigosSorteados = document.getElementById("lista-sorteio");
+
+    // Valida se o sorteio já foi feito
+    if (sorteioFeito == true){
+        amigosSorteados.innerHTML = "";
+    }
 
     //Embaralha a lista de amigos
     listaAmigos.sort(() => Math.random() - 0.5);
@@ -36,20 +44,19 @@ function sortear(){
 
         // Valida se chegou no último número
         if (i === listaAmigos.length - 1){
-            //listaAmigosSortidos.push(`${listaAmigos[i]} --> ${listaAmigos[0]}`)
             amigosSorteados.innerHTML = amigosSorteados.innerHTML + `${listaAmigos[i]} --> ${listaAmigos[0]} <br>`
         } else {
-            //listaAmigosSortidos.push(`${listaAmigos[i]} --> ${listaAmigos[i+1]}`)
             amigosSorteados.innerHTML = amigosSorteados.innerHTML + `${listaAmigos[i]} --> ${listaAmigos[i+1]} <br>`
         }
     }
-}
 
+    // Sinaliza sorteio feito
+    sorteioFeito = true;
+}
 
 function reiniciar(){
     document.getElementById("lista-amigos").innerHTML = "";
     document.getElementById("lista-sorteio").innerHTML = "";
     listaAmigos = [];
-    listaAmigosSortidos = [];
-    document.getElementById("nome-amigo").value = "";
+    sorteioFeito = false;
 }
