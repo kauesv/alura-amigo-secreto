@@ -5,9 +5,13 @@ function adicionar(){
     let nomeAmigo = document.getElementById("nome-amigo");
     let amigosIncluidos = document.getElementById("lista-amigos");
 
-    //Adiciono o nome na lista
-    listaAmigos.push(nomeAmigo.value);
-
+    //Valida se o nome ja existe, se não adiciona o nome na lista
+    if ((!listaAmigos.includes(nomeAmigo.value)) && (nomeAmigo.value != "")){
+        listaAmigos.push(nomeAmigo.value);
+    } else {
+        alert("O nome já esta na lista ou é inválido.")
+    }
+    
     //Adiciona a lista no HTML
     amigosIncluidos.innerHTML = listaAmigos;
 
