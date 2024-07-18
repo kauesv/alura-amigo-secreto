@@ -47,5 +47,9 @@ function sortear(){
 
 
 function reiniciar(){
-
+    document.getElementById("lista-amigos").innerHTML = "";
+    document.getElementById("lista-sorteio").innerHTML = "";
+    listaAmigos = [];
+    listaAmigosSortidos = [];
+    document.getElementById("nome-amigo").value = "";
 }
