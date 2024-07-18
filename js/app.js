@@ -3,7 +3,6 @@ let sorteioFeito = false;
 
 function adicionar(){
     let nomeAmigo = document.getElementById("nome-amigo");
-    let amigosIncluidos = document.getElementById("lista-amigos");
 
     //Valida se o nome ja existe, se não adiciona o nome na lista
     if ((!listaAmigos.includes(nomeAmigo.value)) && (nomeAmigo.value != "")){
@@ -11,9 +10,9 @@ function adicionar(){
     } else {
         alert("O nome já esta na lista ou é inválido.")
     }
-    
-    //Adiciona a lista no HTML
-    amigosIncluidos.innerHTML = listaAmigos;
+
+    //Atualiza a lista no HTML
+    atualizaLista()
 
     //Limpa o campo para um novo nome
     nomeAmigo.value = "";
@@ -63,4 +62,18 @@ function reiniciar(){
     document.getElementById("lista-sorteio").innerHTML = "";
     listaAmigos = [];
     sorteioFeito = false;
+}
+
+function removeAmigo(nomeAmigo){
+    let indexNomeAmigo = listaAmigos.indexOf(nomeAmigo);
+    listaAmigos.splice(indexNomeAmigo, 1)
+
+    atualizaLista()
+}
+
+function atualizaLista(){
+    let amigosIncluidos = document.getElementById("lista-amigos");
+    amigosIncluidos.innerHTML = listaAmigos.map(amigo => 
+        `${amigo} <button onclick="removeAmigo('${amigo}')" type="button">Remover</button> <br>`
+    ).join('');
 }
